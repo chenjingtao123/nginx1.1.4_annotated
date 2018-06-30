@@ -83,9 +83,9 @@ struct ngx_shm_zone_s {
 struct ngx_cycle_s {
 
     // 存储所有模块的配置结构体，是个二维数组
-    // 0 = ngx_core_module
+    // 0 = ngx_core_module ->ngx_core_module_create_conf ->return ngx_core_conf_t
     // 1 = ngx_errlog_module
-    // 3 = ngx_event_module
+    // 3 = ngx_event_module->ngx_event_conf_t
     // 4 = ngx_event_core_module
     // 5 = ngx_epoll_module
     // 7 = ngx_http_module
@@ -170,7 +170,7 @@ struct ngx_cycle_s {
     // 保存之前的cycle，如init_cycle
     ngx_cycle_t              *old_cycle;
 
-    // 启动nginx时的配置文件
+    // 启动nginx时的配置文件(/opt/nginx1.1.14/nginx_assemble/conf/nginx.conf)
     ngx_str_t                 conf_file;
 
     // 启动nginx时的-g参数

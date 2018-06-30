@@ -11,6 +11,7 @@
 
 #include <ngx_config.h>
 #include <ngx_core.h>
+#include <zconf.h>
 
 
 typedef int                      ngx_fd_t;

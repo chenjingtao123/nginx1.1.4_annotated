@@ -12,6 +12,7 @@
 
 #include <ngx_config.h>
 #include <ngx_core.h>
+#include <zconf.h>
 
 #define NGX_CONF_BUFFER  4096
 
@@ -406,7 +407,7 @@ ngx_conf_handler(ngx_conf_t *cf, ngx_int_t last)
     // 是否找到指令的标志
     found = 0;
 
-    // 遍历所有模块
+    // 遍历所有模块 ->过遍历核心结构体
     for (i = 0; cf->cycle->modules[i]; i++) {
 
         // 取模块的指令数组
@@ -514,7 +515,7 @@ ngx_conf_handler(ngx_conf_t *cf, ngx_int_t last)
             // NGX_DIRECT_CONF，直接存储在cf->ctx数组里
             // 这个通常是core模块
             if (cmd->type & NGX_DIRECT_CONF) {
-                conf = ((void **) cf->ctx)[cf->cycle->modules[i]->index];
+                conf = ((void **) cf->ctx)[cf->cycle->modules[i]->index];//->ngx_core_conf_t
 
             // NGX_MAIN_CONF，里面存储一个void**指针
             // 例如核心模块http/stream

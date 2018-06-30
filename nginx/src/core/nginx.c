@@ -13,6 +13,7 @@
 #include <ngx_config.h>
 #include <ngx_core.h>
 #include <nginx.h>
+#include <zconf.h>
 
 
 // 显示帮助信息，1.10增加-T，可以dump整个配置文件

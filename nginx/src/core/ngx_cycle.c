@@ -15,6 +15,7 @@
 #include <ngx_config.h>
 #include <ngx_core.h>
 #include <ngx_event.h>
+#include <zconf.h>
 
 
 // 出错时销毁cycle里的内存池
@@ -281,7 +282,7 @@ ngx_init_cycle(ngx_cycle_t *old_cycle)
 
     // 初始化core模块
     for (i = 0; cycle->modules[i]; i++) {
-        // 检查type，只处理core模块，数量很少
+        // 检查type，只处理core模块，数量很少(ngx_core_module )
         if (cycle->modules[i]->type != NGX_CORE_MODULE) {
             continue;
         }
@@ -331,11 +332,11 @@ ngx_init_cycle(ngx_cycle_t *old_cycle)
     conf.pool = pool;
     conf.log = log;
 
-    //另一个重要参数，当前解析环境的模块类型
+    //另一个重要参数，当前解析环境的模块类型(globle core)
     conf.module_type = NGX_CORE_MODULE;
 
     // 当前解析环境的指令类型，解析时会进行判断
-    conf.cmd_type = NGX_MAIN_CONF;
+    conf.cmd_type = NGX_MAIN_CONF;//指令出现在配置文件的最外层
 
 #if 0
     log->log_level = NGX_LOG_DEBUG_ALL;

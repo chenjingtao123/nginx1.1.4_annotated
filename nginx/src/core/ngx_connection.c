@@ -17,6 +17,7 @@
 #include <ngx_config.h>
 #include <ngx_core.h>
 #include <ngx_event.h>
+#include <zconf.h>
 
 
 // os/unix/ngx_os.h
