@@ -1,3 +1,7 @@
 
-Documentation is available at http://nginx.org
+gdb ./nginx
+
+打需要的断点
+
+r -c /opt/nginx1.1.14/nginx_assemble/conf/nginx.conf
 
