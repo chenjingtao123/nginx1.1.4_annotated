@@ -1371,7 +1371,7 @@ ngx_close_connection(ngx_connection_t *c)
 
 
 // 连接加入cycle的复用队列ngx_cycle->reusable_connections_queue
-// 参数reusable表示是否可以复用，即加入队列
+// 参数reusable表示是否可以复用，即加入队列(lru 算法)
 void
 ngx_reusable_connection(ngx_connection_t *c, ngx_uint_t reusable)
 {
@@ -1429,6 +1429,8 @@ ngx_drain_connections(ngx_cycle_t *cycle)
             break;
         }
 
+        // reusable连接队列是从头插入的，意味着越靠近队列尾部的连接，空闲未被
+        // 使用的时间就越长，这种情况下，优先回收它，类似LRU
         // 取出队列末尾的连接对象，必定是c->reusable == true
         q = ngx_queue_last(&cycle->reusable_connections_queue);
 
