@@ -1,3 +1,4 @@
+./configure --prefix=/opt/nginx1.1.14/nginx_assemble  --with-cc-opt="-g -O0" --add-module=/opt/nginx1.1.14/nginx/thirdModule/ngx_http_mytest_module  --with-debug
 
 gdb ./nginx
 
